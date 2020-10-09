@@ -52,4 +52,4 @@ deploy:
     tags: true
 
 after_deploy:
-  - dotnet nuget push ./output/RaGae.*.nupkg -k $NUGET_TOKEN -s https://api.nuget.org/v3/index.json
+  - dotnet nuget push ./output/'*.nupkg' -k $NUGET_TOKEN -s https://api.nuget.org/v3/index.json
