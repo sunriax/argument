@@ -31,7 +31,7 @@ before_deploy:
   - set -e
   - dotnet build -c Release -o ./output
   - zip ./Argument.zip ./output/* -x "*.nupkg"
-  - tar cfvz --exclude="*.nupkg" ./Argument.tar.gz ./output/*
+  - tar cfvz --exclude="*.nupkg" ./Argument.tar.gz ./output
 
 deploy:
   provider: releases
