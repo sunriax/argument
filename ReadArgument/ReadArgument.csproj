@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ArgumentLib\ArgumentLib.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Marshaler\" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ApplicationFile Include="$(SolutionDir)ArgumentLib\ArgumentLib.json" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <LibraryFiles Include="$(ProjectDir)Marshaler\*" />
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Copy SourceFiles="@(ApplicationFile)" DestinationFolder="$(TargetDir)" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(LibraryFiles)" DestinationFolder="$(TargetDir)Marshaler" SkipUnchangedFiles="true" />
+  </Target>
+  
+</Project>

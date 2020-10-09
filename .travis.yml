@@ -1,0 +1,55 @@
+# Travis CI build pipeline
+# --------------------------------------------
+
+language: csharp
+solution: ArgumentLib.sln
+mono: none
+dotnet: 3.1.301
+
+addons:
+  apt:
+    packages:
+      - zip
+      - tar
+      - gzip
+
+before_script:
+  - set -e
+  - dotnet restore
+
+script:
+  - |
+    if [ -z "$TRAVIS_TAG" ]
+    then
+      set -e
+      dotnet build -c Release
+      dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:Exclude="[xunit*]*" /p:excludebyfile="**/*.Designer.cs"
+      bash <(curl -s https://codecov.io/bash) -Z
+    fi
+
+before_deploy:
+  - set -e
+  - dotnet build -c Release -o ./output
+  - zip ./Argument.zip ./output/* -x "*.nupkg"
+  - tar cfvz --exclude="*.nupkg" ./Argument.tar.gz ./output/*
+
+deploy:
+  provider: releases
+  overwrite: true
+  api_key: $GITHUB_TOKEN
+  file:
+    - "./Argument.zip"
+    - "./Argument.tar.gz"
+    - "./output/RaGae.ArgumentLib.dll"
+    - "./output/ArgumentLib.json"
+    - "./output/RaGae.ArgumentLib.MarshalerLib.dll"
+    - "./output/RaGae.ArgumentLib.BooleanMarshalerLib.dll"
+    - "./output/RaGae.ArgumentLib.StringMarshalerLib.dll"
+    - "./output/RaGae.ArgumentLib.IntegerMarshalerLib.dll"
+    - "./output/RaGae.ArgumentLib.DoubleMarshalerLib.dll"
+  skip_cleanup: true
+  on:
+    tags: true
+
+after_deploy:
+  - dotnet nuget push ./output/RaGae.*.nupkg -k $NUGET_TOKEN -s https://api.nuget.org/v3/index.json

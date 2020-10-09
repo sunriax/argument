@@ -1,0 +1,32 @@
+﻿{
+	"ReflectionConfig": [
+		{
+			"Files": [
+				"Marshaler/Wrong.dll"
+			]
+		}
+	],
+	"ArgumentConfig": {
+		"Schema": [
+			{
+				"Argument": [
+					"string",
+					"text",
+					"data"
+				],
+				"Marshaler": "*",
+				"Required": true
+			},
+			{
+				"Argument": [
+					"StRiNg2",
+					"TeXt2",
+					"DaTa2"
+				],
+				"Marshaler": "*",
+				"Required": false
+			}
+		],
+		"Delimiter": "-:/"
+	}
+}

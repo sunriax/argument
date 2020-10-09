@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>RaGae</RootNamespace>
+    <AssemblyName>RaGae.ArgumentLib.$(MSBuildProjectName)</AssemblyName>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageLicenseExpression>GPL-3.0-only</PackageLicenseExpression>
+    <Title>MarshalerLib</Title>
+    <Authors>G.Raf</Authors>
+    <Company>G.Raf^engineering</Company>
+    <Copyright>(c) 2020 G.Raf</Copyright>
+    <PackageProjectUrl>https://github.com/sunriax/argument</PackageProjectUrl>
+    <PackageTags>argument, base, handling, ragae, sunriax, 0x007E</PackageTags>
+    <Version>1.0.0</Version>
+    <Description>Base class for command line interface argument handling/building.</Description>
+    <PackageId>RaGae.Argument.Marshaler</PackageId>
+    <RepositoryUrl>https://github.com/sunriax/argument.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageReleaseNotes></PackageReleaseNotes>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="RaGae.Exception" Version="1.0.1" />
+  </ItemGroup>
+
+</Project>
