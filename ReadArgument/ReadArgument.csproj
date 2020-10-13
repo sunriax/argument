@@ -16,6 +16,10 @@
   <ItemGroup>
     <ApplicationFile Include="$(SolutionDir)ArgumentLib\ArgumentLib.json" />
   </ItemGroup>
+    
+  <ItemGroup>
+    <ApplicationNoSchemaFile Include="$(SolutionDir)ArgumentLib\ArgumentLib.NoSchema.json" />
+  </ItemGroup>
   
   <ItemGroup>
     <LibraryFiles Include="$(ProjectDir)Marshaler\*" />
@@ -23,6 +27,7 @@
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
     <Copy SourceFiles="@(ApplicationFile)" DestinationFolder="$(TargetDir)" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(ApplicationNoSchemaFile)" DestinationFolder="$(TargetDir)" SkipUnchangedFiles="true" />
     <Copy SourceFiles="@(LibraryFiles)" DestinationFolder="$(TargetDir)Marshaler" SkipUnchangedFiles="true" />
   </Target>
   
