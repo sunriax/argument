@@ -336,7 +336,7 @@ PM> Install-Package RaGae.Argument.Marshaler
 
 ``` csharp
 using System;
-using ArgumentMarshalerLib;
+using RaGae.ArgumentLib.MarshalerLib;
 
 namespace RaGae.ArgumentLib.TestMarshalerLib
 {
@@ -362,24 +362,23 @@ namespace RaGae.ArgumentLib.TestMarshalerLib
             Value = "This is my personal marshaler";
         }
 
-        public class TestMarshalerException : ArgumentsException
+        public class TestMarshalerException : BaseArgumentException
         {
-            public TestMarshalerException() { }
-
             public TestMarshalerException(ErrorCode errorCode) : base(errorCode) { }
+
+            public TestMarshalerException(ErrorCode errorCode, string message) : base(errorCode, message) { }
 
             public override string ErrorMessage()
             {
                 switch (ErrorCode)
                 {
                     case ErrorCode.MISSING:
-                        return $"Could not find test parameter for -{ErrorArgumentId}";
+                        return $"Could not find test parameter for -{base.ErrorArgumentId}";
                     default:
                         return string.Empty;
                 }
             }
         }
-
     }
 }
 ```
