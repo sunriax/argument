@@ -9,10 +9,7 @@ namespace RaGae.ArgumentLib
     {
         public ArgumentException(ErrorCode errorCode, string errorParameter) : base(errorCode, errorParameter) { }
 
-        public ArgumentException(ErrorCode errorCode, string errorArgumentId, string errorParameter) : base(errorCode, errorParameter)
-        {
-            base.ErrorArgumentId = errorArgumentId;
-        }
+        public ArgumentException(ErrorCode errorCode, string errorArgumentId, string errorParameter) : base(errorCode, errorArgumentId, errorParameter) { }
 
         public override string ErrorMessage()
         {
@@ -21,15 +18,15 @@ namespace RaGae.ArgumentLib
                 case ErrorCode.OK:
                     return "TILT: Should not be reached!";
                 case ErrorCode.EMPTY:
-                    return $"Config File: {base.ErrorParameter} contains no/invalid data!";
+                    return $"Config File: {base.ErrorParameter} contains no data!";
+                case ErrorCode.INVALID:
+                    return $"Config File: {base.ErrorParameter} contains invalid data!";
                 case ErrorCode.UNEXPECTED_ARGUMENT:
                     return $"Argument -{base.ErrorArgumentId} unexpected";
-                case ErrorCode.INVALID_ARGUMENT_NAME:
-                    return $"'-{base.ErrorArgumentId}' is not a valid argument name";
                 case ErrorCode.INVALID_PARAMETER:
                     return $"'{base.ErrorParameter}' is not a valid parameter";
-                case ErrorCode.INVALID_SCHEMA:
-                    return $"Schema error: '{base.ErrorParameter}'";
+                case ErrorCode.MISSING:
+                    return $"Missing parameter: ('{base.ErrorArgumentId}')";
                 case ErrorCode.REFLECTION:
                     return base.ErrorParameter;
                 case ErrorCode.GLOBAL:

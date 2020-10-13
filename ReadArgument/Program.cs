@@ -14,7 +14,6 @@ namespace ReadArgument
         {
             Argument argument = null;
 
-
             Console.WriteLine("WITH SCHEMA IN ARGUMENTLIB.JSON");
 
             try

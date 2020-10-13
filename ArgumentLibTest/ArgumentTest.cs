@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using Xunit;
 using Xunit.Sdk;
 using ArgumentException = RaGae.ArgumentLib.ArgumentException;
@@ -22,6 +23,7 @@ namespace ArgumentLibTest
     {
         private static string configFile = "ArgumentLib.json";
         private static string configFiles = "ArgumentLib.Files.json";
+        private static string configEmptyDelimiter = "ArgumentLib.EmptyDelimiter.json";
         private static string[] otherDelimiters = { ":", "/" };
         private static string wrongDelimiter = "!";
         private static string[][] args = new string[][]
@@ -211,7 +213,7 @@ namespace ArgumentLibTest
 
                 foreach (ArgumentConstructor constructor in GetConstructorTypes())
                 {
-                    if(length)
+                    if (length)
                     {
                         yield return new object[] { constructor, configFile, itemWithOptional.ToArray(), itemWithOptionalLength };
                         yield return new object[] { constructor, configFiles, itemWithOptional.ToArray(), itemWithOptionalLength };
@@ -238,7 +240,7 @@ namespace ArgumentLibTest
 
                         foreach (string delimiter in otherDelimiters)
                         {
-                            yield return new object[] { constructor, configFile, itemWithOptional.Select(x => x.Replace("-", delimiter)).ToArray()  };
+                            yield return new object[] { constructor, configFile, itemWithOptional.Select(x => x.Replace("-", delimiter)).ToArray() };
                             yield return new object[] { constructor, configFiles, itemWithOptional.Select(x => x.Replace("-", delimiter)).ToArray() };
                         }
 
@@ -277,17 +279,32 @@ namespace ArgumentLibTest
         {
             foreach (ArgumentConstructor constructor in GetConstructorTypes())
             {
-                yield return new object[] { constructor, null, null, null, ErrorCode.GLOBAL, $"Config <> not found!", "There was an ERROR with 'Config <> not found!'" };
-                yield return new object[] { constructor, string.Empty, null, null, ErrorCode.GLOBAL, $"Config <> not found!", "There was an ERROR with 'Config <> not found!'" };
-                yield return new object[] { constructor, "   ", null, null, ErrorCode.GLOBAL, $"Config <   > not found!", "There was an ERROR with 'Config <   > not found!'" };
-                yield return new object[] { constructor, "wrong", null, null, ErrorCode.GLOBAL, $"Config <wrong> not found!", "There was an ERROR with 'Config <wrong> not found!'" };
-                yield return new object[] { constructor, "ArgumentLib.WrongFiles.json", null, null, ErrorCode.REFLECTION, "Assemblyfile <Marshaler/Wrong.dll> not found!", null };
-                yield return new object[] { constructor, "ArgumentLib.WrongPath.json", null, null, ErrorCode.REFLECTION, "Directory <WrongPath> not found!", null };
-                yield return new object[] { constructor, "ArgumentLib.WrongSpecifier.json", null, null, ErrorCode.REFLECTION, "Directory <Marshaler/*Wrong.dll> contains no assemblies!", null };
-                yield return new object[] { constructor, "ArgumentLib.json", args[0].Skip(1), null, ErrorCode.INVALID_PARAMETER, "Test string", "'Test string' is not a valid parameter" };
-                yield return new object[] { constructor, "ArgumentLib.json", args[0].Select(x => x.Replace("-", wrongDelimiter)), schema, ErrorCode.INVALID_PARAMETER, "!StRiNg", "'!StRiNg' is not a valid parameter" };
-                yield return new object[] { constructor, "ArgumentLib.EmptySchema.json", null, null, ErrorCode.EMPTY, "Schema", "Config File: Schema contains no/invalid data!" };
-                yield return new object[] { constructor, "ArgumentLib.WrongMarshaler.json", null, null, ErrorCode.REFLECTION, "PropertyName <Schema:+> not found!", null };
+                yield return new object[] { constructor, null, null, null, ErrorCode.GLOBAL, null, $"Config <> not found!", "There was an ERROR with 'Config <> not found!'" };
+                yield return new object[] { constructor, string.Empty, null, null, ErrorCode.GLOBAL, null, $"Config <> not found!", "There was an ERROR with 'Config <> not found!'" };
+                yield return new object[] { constructor, "   ", null, null, ErrorCode.GLOBAL, null, $"Config <   > not found!", "There was an ERROR with 'Config <   > not found!'" };
+                yield return new object[] { constructor, "wrong", null, null, ErrorCode.GLOBAL, null, $"Config <wrong> not found!", "There was an ERROR with 'Config <wrong> not found!'" };
+                yield return new object[] { constructor, "ArgumentLib.WrongFiles.json", null, null, ErrorCode.REFLECTION, null, "Assemblyfile <Marshaler/Wrong.dll> not found!", null };
+                yield return new object[] { constructor, "ArgumentLib.WrongPath.json", null, null, ErrorCode.REFLECTION, null, "Directory <WrongPath> not found!", null };
+                yield return new object[] { constructor, "ArgumentLib.WrongSpecifier.json", null, null, ErrorCode.REFLECTION, null, "Directory <Marshaler/*Wrong.dll> contains no assemblies!", null };
+                yield return new object[] { constructor, "ArgumentLib.EmptySchema.json", null, null, ErrorCode.EMPTY, null, "Schema", "Config File: Schema contains no data!" };
+                yield return new object[] { constructor, "ArgumentLib.InvalidSchema.json", null, new List<ArgumentSchema>()
+                {
+                    new ArgumentSchema()
+                    {
+                        Argument = new List<string>()
+                        {
+                            "str!ng",
+                            "t??t"
+                        },
+                        Marshaler = "*",
+                        Required = true
+                    }
+                }, ErrorCode.INVALID, null, "Argument", "Config File: Argument contains invalid data!" };
+                yield return new object[] { constructor, "ArgumentLib.WrongMarshaler.json", null, null, ErrorCode.REFLECTION, null, "PropertyName <Schema:+> not found!", null };
+                yield return new object[] { constructor, "ArgumentLib.json", args[0].Skip(1), null, ErrorCode.INVALID_PARAMETER, null, "Test string", "'Test string' is not a valid parameter" };
+                yield return new object[] { constructor, "ArgumentLib.json", args[0].Select(x => x.Replace("-", wrongDelimiter)), schema, ErrorCode.INVALID_PARAMETER, null, "!StRiNg", "'!StRiNg' is not a valid parameter" };
+                yield return new object[] { constructor, "ArgumentLib.json", new string[] { args[0][0].Remove(args[0][0].Length - 1) }, schema.Take(1), ErrorCode.UNEXPECTED_ARGUMENT, "strin", null, "Argument -strin unexpected" };
+                yield return new object[] { constructor, "ArgumentLib.WrongAttachment.json", new string[] { args[0][4], "abcd" }, schema.Skip(2).Take(1), ErrorCode.INVALID, "int", "abcd", "Argument -int expects an integer but was 'abcd'" };
             }
         }
 
@@ -319,7 +336,7 @@ namespace ArgumentLibTest
 
         [Theory]
         [MemberData(nameof(GetData_Passing), true)]
-        public void CreateReferenceAndGetValues_Passing(ArgumentConstructor type, string config, string[] arguments, int length)
+        public void CreateReferenceAndGetValue_Passing(ArgumentConstructor type, string config, string[] arguments, int length)
         {
             Argument a = CreateConstructor_Passing(type, config, arguments, schema);
 
@@ -346,7 +363,7 @@ namespace ArgumentLibTest
 
         [Theory]
         [MemberData(nameof(GetWrongConfig_Failing))]
-        public void CreateReference_Failing(ArgumentConstructor type, string config, IEnumerable<string> argument, IEnumerable<ArgumentSchema> schema, ErrorCode error, string parameter, string message)
+        public void CreateReference_Failing(ArgumentConstructor type, string config, IEnumerable<string> argument, IEnumerable<ArgumentSchema> schema, ErrorCode error, string argumentId, string parameter, string message)
         {
             Exception a = CreateConstructor_Failing(type, config, argument, schema);
 
@@ -355,10 +372,15 @@ namespace ArgumentLibTest
                 BaseArgumentException ex = a as BaseArgumentException;
 
                 Assert.Equal(error, ex.ErrorCode);
-                Assert.Null(ex.ErrorArgumentId);
+
+                if (!string.IsNullOrEmpty(argumentId))
+                    Assert.Equal(argumentId, ex.ErrorArgumentId);
+                else
+                    Assert.Null(ex.ErrorArgumentId);
+
                 Assert.Equal(parameter, ex.ErrorParameter);
-                
-                if(!string.IsNullOrEmpty(message))
+
+                if (!string.IsNullOrEmpty(message))
                     Assert.Equal(message, ex.ErrorMessage());
                 else
                     Assert.Equal(parameter, ex.ErrorMessage());
@@ -371,7 +393,57 @@ namespace ArgumentLibTest
 
         [Theory]
         [MemberData(nameof(GetData_Passing), false)]
-        public void CreateReferenceAndGetValues_Failing(ArgumentConstructor type, string config, string[] arguments)
+        public void CreateReferenceAndGetRequiredValue_Failing(ArgumentConstructor type, string config, string[] arguments)
+        {
+            Argument arg = CreateConstructor_Passing(type, config, arguments.Skip(2).Take(2), schema.Take(4));
+
+            Exception a = Assert.Throws<ArgumentException>(() => arg.GetValue<string>(arguments[0].Substring(1).ToString()));
+
+            if (a is BaseArgumentException)
+            {
+                BaseArgumentException ex = a as BaseArgumentException;
+
+                Assert.Equal(ErrorCode.MISSING, ex.ErrorCode);
+                Assert.Equal("string, text, data", ex.ErrorArgumentId);
+                Assert.Null(ex.ErrorParameter);
+                Assert.Equal("Missing parameter: ('string, text, data')", ex.ErrorMessage());
+            }
+            else
+            {
+                throw new XunitException();
+            }
+        }
+
+        [Fact]
+        public void CreateReferenceWithEmptyDelimiterAndGetValues_Passing()
+        {
+            foreach (ArgumentConstructor constructor in GetConstructorTypes())
+            {
+                Argument a = CreateConstructor_Passing(constructor, configEmptyDelimiter, args[0].Take(4), schema.Take(2));
+
+                Assert.Equal(args[0][1], a.GetValue<object>(args[0][0].Substring(1).ToString()));
+                Assert.Equal(args[0][3], a.GetValue<object>(args[0][2].Substring(1).ToString()));
+            }
+        }
+
+        [Fact]
+        public void CreateReferenceWithEmptyDelimiterAndGetValues_Failing()
+        {
+            foreach (ArgumentConstructor constructor in GetConstructorTypes())
+            {
+                Argument a;
+
+                ArgumentException ex = Assert.Throws<ArgumentException>(() => a = CreateConstructor_Passing(constructor, configEmptyDelimiter, args[0].Take(4).Select(x => x.Replace("-", "/")).ToArray(), schema.Take(2)));
+
+                Assert.Equal(ErrorCode.INVALID_PARAMETER, ex.ErrorCode);
+                Assert.Equal(args[0][0].Replace("-", "/"), ex.ErrorParameter);
+                Assert.Equal($"'{args[0][0].Replace("-", "/")}' is not a valid parameter", ex.ErrorMessage());
+            }
+        }
+
+        [Theory]
+        [MemberData(nameof(GetData_Passing), false)]
+        public void CreateReferenceWithWrongDelimiterAndGetValues_Failing(ArgumentConstructor type, string config, string[] arguments)
         {
             Argument a = CreateConstructor_Passing(type, config, arguments, schema);
 
@@ -381,6 +453,28 @@ namespace ArgumentLibTest
             Assert.Null(ex.ErrorArgumentId);
             Assert.Equal(arguments[1].Substring(2).ToString(), ex.ErrorParameter);
             Assert.Equal($"'{arguments[1].Substring(2).ToString()}' is not a valid parameter", ex.ErrorMessage());
+        }
+
+
+        [Theory]
+        [MemberData(nameof(GetData_Passing), true)]
+        public void CreateReferenceAndGetSchema_Passing(ArgumentConstructor type, string config, string[] arguments, int length)
+        {
+            Argument a = CreateConstructor_Passing(type, config, arguments, schema);
+
+            List<string> argumentList = new List<string>();
+
+            for (int i = 0; i < length; i += 2)
+            {
+                argumentList.Add(arguments.ElementAt(i).Substring(1).ToLower());
+            }
+
+            for (int i = length; i < arguments.Length; i++)
+            {
+                argumentList.Add(arguments.ElementAt(i).Substring(1).ToLower());
+            }
+
+            Assert.True(argumentList.SequenceEqual(a.ArgumentsFound));
         }
     }
 }

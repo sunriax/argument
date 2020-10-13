@@ -19,7 +19,7 @@ Own argument types can be build with own classes. They need to inherit from the 
 
 ## Installation
 
-To install ArgumentReader it is possible to download necessary libraries [[zip](https://github.com/sunriax/argument/releases/latest/download/Argument.zip) | [tar.gz](https://github.com/sunriax/argument/releases/latest/download/Argument.zip)] or install the library via nuget.
+To install ArgumentReader it is possible to download necessary libraries [[zip](https://github.com/sunriax/argument/releases/latest/download/Argument.zip) | [tar.gz](https://github.com/sunriax/argument/releases/latest/download/Argument.tar.gz)] or install the library via nuget.
 
 ```
 PM> Install-Package RaGae.Argument
@@ -107,11 +107,11 @@ To copy the Marshalers to output folder setup the *.csproj file.
 
 ``` json
 {
-	"ReflectionConfig": [
-		{
-			"ReflectionPath": "Marshaler",
-			"FileSpecifier": "*MarshalerLib.dll"
-		}
+  "ReflectionConfig": [
+    {
+      "ReflectionPath": "Marshaler",
+      "FileSpecifier": "*MarshalerLib.dll"
+    }
   ]
 }
 ```
@@ -127,17 +127,17 @@ PM> Install-Package RaGae.Argument.DoubleMarshaler
 
 **Configuration setup after nuget installation**
 
-``` json
+``` yaml
 {
-	"ReflectionConfig": [
-		{
-			"Files": [
-				"RaGae.ArgumentLib.BooleanMarshalerLib.dll",
-				"RaGae.ArgumentLib.StringMarshalerLib.dll",
-				"RaGae.ArgumentLib.IntegerMarshalerLib.dll",
-				"RaGae.ArgumentLib.DoubleMarshalerLib.dll"
-			]
-		}
+  "ReflectionConfig": [
+    {
+      "Files": [
+        "RaGae.ArgumentLib.BooleanMarshalerLib.dll",
+        "RaGae.ArgumentLib.StringMarshalerLib.dll",
+        "RaGae.ArgumentLib.IntegerMarshalerLib.dll",
+        "RaGae.ArgumentLib.DoubleMarshalerLib.dll"
+      ]
+    }
   ]
 }
 ```
@@ -172,17 +172,17 @@ Argument argument = new Argument("ArgumentLib.json", "Arguments from command lin
 
 *ArgumentLib.json*
 
-``` json
+``` yaml
 {
-	"ReflectionConfig": [
-		{
-			"ReflectionPath": "Marshaler",
-			"FileSpecifier": "*MarshalerLib.dll"
-		}
-	],
-	"ArgumentConfig": {
-		"Delimiter": "-:/"
-	}
+  "ReflectionConfig": [
+    {
+        "ReflectionPath": "Marshaler",
+        "FileSpecifier": "*MarshalerLib.dll"
+    }
+  ],
+  "ArgumentConfig": {
+    "Delimiter": "-:/"
+  }
 }
 ```
 
@@ -194,28 +194,28 @@ Argument argument = new Argument("ArgumentLib.json", "Arguments from command lin
 
 *ArgumentsLib.json*
 
-``` json
+``` yaml
 {
-	"ReflectionConfig": [
-		{
-			"ReflectionPath": "Marshaler",
-			"FileSpecifier": "*MarshalerLib.dll"
-		}
-	],
-	"ArgumentConfig": {
-		"Schema": [
-			{
-				"Argument": [
-					"string",
-					"text",
-					"data"
-				],
-				"Marshaler": "*",
-				"Required": true
-      }
-		],
-		"Delimiter": "-:/"
-	}
+  "ReflectionConfig": [
+    {
+        "ReflectionPath": "Marshaler",
+        "FileSpecifier": "*MarshalerLib.dll"
+    }
+  ],
+  "ArgumentConfig": {
+    "Schema": [
+        {
+            "Argument": [
+                "string",
+                "text",
+                "data"
+            ],
+            "Marshaler": "*",
+            "Required": true
+    }
+    ],
+    "Delimiter": "-:/"
+  }
 }
 ```
 
@@ -293,7 +293,7 @@ Argument argument = new Argument("...", "...");
 
 `*ArgumentsLib.json*`
 
-``` json
+``` yaml
 {
   "ArgumentConfig": {
       "Schema": [

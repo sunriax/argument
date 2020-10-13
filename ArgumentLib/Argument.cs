@@ -38,8 +38,11 @@ namespace RaGae.ArgumentLib
             {
                 this.config = Loader.LoadConfigSection<ArgumentConfig>(configFile, nameof(ArgumentConfig));
             }
-            catch
+            catch (Exception ex)
             {
+                if(ex.InnerException is ArgumentException)
+                    throw new ArgumentException((ex.InnerException as ArgumentException).ErrorCode, (ex.InnerException as ArgumentException).ErrorParameter);
+
                 throw new ArgumentException(ErrorCode.GLOBAL, string.Format(ArgumentResource.ConfigNotFound, configFile));
             }
 
@@ -69,11 +72,7 @@ namespace RaGae.ArgumentLib
 
             foreach (ArgumentSchema argument in this.config.Schema)
             {
-                if (argument.Argument != null && 
-                    argument.Argument.Count() > 0)
-                    ParseSchemaArgument(argument);
-                else
-                    throw new ArgumentException(ErrorCode.EMPTY, nameof(config.Schema));
+                ParseSchemaArgument(argument);
             }
         }
 
@@ -81,7 +80,7 @@ namespace RaGae.ArgumentLib
         {
             try
             {
-                Marshaler marshaler = reflection.GetInstanceByProperty<Marshaler>(nameof(marshaler.Schema), argument.Marshaler) ?? throw new ArgumentException(ErrorCode.INVALID_ARGUMENT_NAME, string.Join(ArgumentResource.Separator, argument.Argument));
+                Marshaler marshaler = reflection.GetInstanceByProperty<Marshaler>(nameof(marshaler.Schema), argument.Marshaler);
                 this.marshalers.Add(argument, marshaler);
             }
             catch (ReflectionException ex)
@@ -109,7 +108,7 @@ namespace RaGae.ArgumentLib
         {
             argumentString = argumentString.ToLower();
 
-            if(!this.marshalers
+            if (!this.marshalers
                     .Any(x => x.Key.Argument
                     .Contains(argumentString)))
                 throw new ArgumentException(ErrorCode.UNEXPECTED_ARGUMENT, argumentString, null);
@@ -126,10 +125,10 @@ namespace RaGae.ArgumentLib
             {
                 m.Set(currentArgument);
             }
-            catch (ArgumentException ErrorCode)
+            catch (BaseArgumentException errorCode)
             {
-                ErrorCode.ErrorArgumentId = argumentString;
-                throw ErrorCode;
+                errorCode.ErrorArgumentId = argumentString;
+                throw errorCode;
             }
         }
 
@@ -147,12 +146,12 @@ namespace RaGae.ArgumentLib
 
             try
             {
-                return (T)m.Value;
+                return (T)(m.Value) ?? throw new NullReferenceException();
             }
             catch (NullReferenceException)
             {
                 if (s.Required == true)
-                    throw new ArgumentException(ErrorCode.MISSING, string.Join(ArgumentResource.Separator, s.Argument));
+                    throw new ArgumentException(ErrorCode.MISSING, string.Join(ArgumentResource.Separator, s.Argument), null);
 
                 return default;
             }

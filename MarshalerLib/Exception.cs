@@ -15,19 +15,14 @@ namespace RaGae.ArgumentLib
             MISSING,
             INVALID,
             INVALID_PARAMETER,
-            INVALID_ARGUMENT_NAME,
             REFLECTION,
+            ERROR,
             GLOBAL,
-            INVALID_SCHEMA,
             TEST
         }
 
         public abstract class BaseArgumentException : BaseException<ErrorCode>
         {
-            public BaseArgumentException() { }
-
-            public BaseArgumentException(string message) : base(message) { }
-
             public BaseArgumentException(ErrorCode errorCode)
             {
                 this.ErrorCode = errorCode;
@@ -38,9 +33,17 @@ namespace RaGae.ArgumentLib
                 this.ErrorCode = errorCode;
                 this.ErrorParameter = errorParameter;
             }
+            public BaseArgumentException(ErrorCode errorCode, string errorArgumentId, string errorParameter)
+            {
+                this.ErrorCode = errorCode;
+                this.ErrorArgumentId = errorArgumentId;
+                this.ErrorParameter = errorParameter;
+            }
 
             public string ErrorArgumentId { get; set; }
             public string ErrorParameter { get; set; }
+
+            public override string Message => this.ErrorMessage();
         }
     }
 }

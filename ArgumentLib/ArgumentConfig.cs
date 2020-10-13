@@ -24,6 +24,7 @@ namespace RaGae.ArgumentLib
                             throw new ArgumentException(e.Error, nameof(e.Argument));
                     });
                 }
+
                 this.schema = value;
             }
         }
@@ -49,8 +50,8 @@ namespace RaGae.ArgumentLib
 
                 value.ToList().ForEach(s =>
                 {
-                    if(!(s.Any(c => char.IsLetter(c) || char.IsDigit(c))))
-                        this.Error = ErrorCode.INVALID_PARAMETER;
+                    if(s.Select(c => char.IsLetterOrDigit(c)).Any(s => s == false))
+                        this.Error = ErrorCode.INVALID;
                 });
 
                 this.argument = value.Select(s => s.ToLower());
