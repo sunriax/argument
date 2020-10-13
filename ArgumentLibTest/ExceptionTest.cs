@@ -104,6 +104,7 @@ namespace ArgumentLibTest
             else
                 Assert.Equal(parameter, ex.ErrorParameter);
 
+            Assert.Equal(message, ex.Message);
             Assert.Equal(message, ex.ErrorMessage());
         }
 
@@ -125,6 +126,7 @@ namespace ArgumentLibTest
             else
                 Assert.Equal(parameter, ex.ErrorParameter);
 
+            Assert.Equal(message, ex.Message);
             Assert.Equal(message, ex.ErrorMessage());
         }
     }

@@ -455,10 +455,9 @@ namespace ArgumentLibTest
             Assert.Equal($"'{arguments[1].Substring(2).ToString()}' is not a valid parameter", ex.ErrorMessage());
         }
 
-
         [Theory]
         [MemberData(nameof(GetData_Passing), true)]
-        public void CreateReferenceAndGetSchema_Passing(ArgumentConstructor type, string config, string[] arguments, int length)
+        public void CreateReferenceAndGetArgumentsFound_Passing(ArgumentConstructor type, string config, string[] arguments, int length)
         {
             Argument a = CreateConstructor_Passing(type, config, arguments, schema);
 
@@ -475,6 +474,30 @@ namespace ArgumentLibTest
             }
 
             Assert.True(argumentList.SequenceEqual(a.ArgumentsFound));
+        }
+
+        [Fact]
+        public void CreateReferenceAndGetSchema_Passing()
+        {
+            List<string> arguments = args[0].ToList();
+            arguments.Add(booleanArgs[0].Split(",")[0]);
+
+            Argument a = CreateConstructor_Passing(ArgumentConstructor.WithSchema, configFile, args[0], schema);
+
+            List<string> originalSchema = new List<string>();
+            List<string> argumentSchema = new List<string>();
+
+            foreach (ArgumentSchema s in schema)
+            {
+                originalSchema.Add(string.Join(",", s.Argument.Select(x => x.ToLower())));
+            }
+
+            foreach (IEnumerable<string> s in a.Schema)
+            {
+                argumentSchema.Add(string.Join(",", s));
+            }
+
+            Assert.True(originalSchema.SequenceEqual(argumentSchema));
         }
     }
 }
