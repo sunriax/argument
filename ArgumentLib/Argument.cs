@@ -146,7 +146,10 @@ namespace RaGae.ArgumentLib
 
             try
             {
-                return (T)(m.Value) ?? throw new NullReferenceException();
+                if((T)(m.Value) == null)
+                    throw new NullReferenceException();
+
+                return (T)(m.Value);
             }
             catch (NullReferenceException)
             {

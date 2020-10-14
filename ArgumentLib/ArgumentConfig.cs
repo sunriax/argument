@@ -50,7 +50,7 @@ namespace RaGae.ArgumentLib
 
                 value.ToList().ForEach(s =>
                 {
-                    if(s.Select(c => char.IsLetterOrDigit(c)).Any(s => s == false))
+                    if(s.Select(c => char.IsLetterOrDigit(c)).Any(b => b == false))
                         this.Error = ErrorCode.INVALID;
                 });
 

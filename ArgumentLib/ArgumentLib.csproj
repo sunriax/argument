@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>RaGae</RootNamespace>
     <AssemblyName>RaGae.$(MSBuildProjectName)</AssemblyName>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -13,7 +13,7 @@
     <Copyright>(c) 2020 G.Raf</Copyright>
     <PackageProjectUrl>https://github.com/sunriax/argument</PackageProjectUrl>
     <PackageTags>command, cli, argument, parameter, console, ragae, sunriax, 0x007E</PackageTags>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
     <Description>Tool for reading arguments (bool, integer, double, string) from the command line within a given schema. The tool also can easily be extended, without recompiling the whole library.</Description>
     <PackageId>RaGae.Argument</PackageId>
     <RepositoryUrl>https://github.com/sunriax/argument.git</RepositoryUrl>
