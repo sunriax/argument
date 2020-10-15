@@ -14,7 +14,7 @@ if /I "%c%" EQU "N" goto :integermarshaler
 goto :booleanmarshaler
 
 :booleanmarshalerdownload
-powershell -Command "(New-Object Net.WebClient).DownloadFile('https://github.com/sunriax/argument/releases/latest/download/RaGae.ArgumentLib.BooleanMarshalerLib.dll', 'BooleanMarshalerLib.dll')"
+powershell -Command "(New-Object Net.WebClient).DownloadFile('https://github.com/sunriax/argument/releases/latest/download/RaGae.ArgumentLib.BooleanMarshalerLib.dll', 'RaGae.ArgumentLib.BooleanMarshalerLib.dll')"
 
 :integermarshaler
 echo IntegerMarshalerLib
@@ -24,7 +24,7 @@ if /I "%c%" EQU "N" goto :stringmarshaler
 goto :integermarshaler
 
 :integermarshalerdownload
-powershell -Command "(New-Object Net.WebClient).DownloadFile('https://github.com/sunriax/argument/releases/latest/download/RaGae.ArgumentLib.IntegerMarshalerLib.dll', 'IntegerMarshalerLib.dll')"
+powershell -Command "(New-Object Net.WebClient).DownloadFile('https://github.com/sunriax/argument/releases/latest/download/RaGae.ArgumentLib.IntegerMarshalerLib.dll', 'RaGae.ArgumentLib.IntegerMarshalerLib.dll')"
 
 :stringmarshaler
 echo StringMarshalerLib
@@ -34,7 +34,7 @@ if /I "%c%" EQU "N" goto :doublemarshaler
 goto :stringmarshaler
 
 :stringmarshalerdownload
-powershell -Command "(New-Object Net.WebClient).DownloadFile('https://github.com/sunriax/argument/releases/latest/download/RaGae.ArgumentLib.StringMarshalerLib.dll', 'StringMarshalerLib.dll')"
+powershell -Command "(New-Object Net.WebClient).DownloadFile('https://github.com/sunriax/argument/releases/latest/download/RaGae.ArgumentLib.StringMarshalerLib.dll', 'RaGae.ArgumentLib.StringMarshalerLib.dll')"
 
 :doublemarshaler
 echo DoubleMarshalerLib
@@ -44,7 +44,7 @@ if /I "%c%" EQU "N" goto :end
 goto :doublemarshaler
 
 :doublemarshalerdownload
-powershell -Command "(New-Object Net.WebClient).DownloadFile('https://github.com/sunriax/argument/releases/latest/download/RaGae.ArgumentLib.DoubleMarshalerLib.dll', 'DoubleMarshalerLib.dll')"
+powershell -Command "(New-Object Net.WebClient).DownloadFile('https://github.com/sunriax/argument/releases/latest/download/RaGae.ArgumentLib.DoubleMarshalerLib.dll', 'RaGae.ArgumentLib.DoubleMarshalerLib.dll')"
 
 :end
 echo End of downloading
