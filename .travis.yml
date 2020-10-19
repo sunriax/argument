@@ -30,7 +30,7 @@ script:
 before_deploy:
   - set -e
   - dotnet build -c Release -o ./output
-  - zip ./Argument.zip ./output/* -x "*.nupkg"
+  - zip ./Argument.zip ./output
   - tar cfvz ./Argument.tar.gz ./output
 
 deploy:

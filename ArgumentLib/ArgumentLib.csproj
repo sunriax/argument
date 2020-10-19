@@ -5,25 +5,27 @@
     <RootNamespace>RaGae</RootNamespace>
     <AssemblyName>RaGae.$(MSBuildProjectName)</AssemblyName>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageLicenseExpression>GPL-3.0-only</PackageLicenseExpression>
-    <Title>ArgumentLib</Title>
+    <Title>$(MSBuildProjectName)</Title>
     <Authors>G.Raf</Authors>
     <Company>G.Raf^engineering</Company>
     <Copyright>(c) 2020 G.Raf</Copyright>
     <PackageProjectUrl>https://github.com/sunriax/argument</PackageProjectUrl>
     <PackageTags>command, cli, argument, parameter, console, ragae, sunriax, 0x007E</PackageTags>
-    <Version>1.0.2</Version>
+    <Version>1.0.3</Version>
     <Description>Tool for reading arguments (bool, integer, double, string) from the command line within a given schema. The tool also can easily be extended, without recompiling the whole library.</Description>
     <PackageId>RaGae.Argument</PackageId>
     <RepositoryUrl>https://github.com/sunriax/argument.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageReleaseNotes></PackageReleaseNotes>
   </PropertyGroup>
-
+    
   <ItemGroup>
-    <PackageReference Include="RaGae.Reflection" Version="1.0.2" />
-    <PackageReference Include="RaGae.Bootstrap" Version="0.0.1" />
+    <PackageReference Include="RaGae.Reflection" Version="1.0.3" />
+    <PackageReference Include="RaGae.Bootstrap" Version="0.0.2" />
   </ItemGroup>
 
   <ItemGroup>
