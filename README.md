@@ -1,6 +1,4 @@
-[![Version: 2.0 Release](https://img.shields.io/badge/Version-1.0%20Release-green.svg)](https://github.com/sunriax) [![Build Status](https://www.travis-ci.org/sunriax/argument.svg?branch=master)](https://www.travis-ci.org/sunriax/argument) [![codecov](https://codecov.io/gh/sunriax/argument/branch/master/graph/badge.svg)](https://codecov.io/gh/sunriax/argument) [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-
-
+[![Version: 1.0 Release](https://img.shields.io/badge/Version-1.0%20Release-green.svg)](https://github.com/sunriax) [![Build Status](https://www.travis-ci.org/sunriax/argument.svg?branch=master)](https://www.travis-ci.org/sunriax/argument) [![codecov](https://codecov.io/gh/sunriax/argument/branch/master/graph/badge.svg)](https://codecov.io/gh/sunriax/argument) [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 # Argument Reader
 
@@ -79,7 +77,7 @@ Download [Y/N]? y
 
 To copy the Marshalers to output folder setup the *.csproj file.
 
-*\*.csproj*
+*`*.csproj`*
 ``` xml
 <Project Sdk="Microsoft.NET.Sdk">
   // ...
@@ -105,7 +103,7 @@ To copy the Marshalers to output folder setup the *.csproj file.
 
 **Configuration setup after download or manual installation**
 
-``` json
+``` yaml
 {
   "ReflectionConfig": [
     {
@@ -327,8 +325,8 @@ Argument argument = new Argument("...", "...");
 1. Create a new VisualStudio .NET Standard Classlibrary (**??MarshalerLib**)
 1. Link a new project reference to [RaGae.ArgumentLib.MarshalerLib.dll](https://github.com/sunriax/argument/releases/latest/download/RaGae.ArgumentLib.MarshalerLib.dll) (in this repository) or install as nuget (see below)
 1. Write Marshaler (See example code below)
-1. Copy the TestMarshalerLib.dll to the Marshaler directory in your project
-1. Implement the *?* in your schema (e.g. "mymarshaler?")
+1. Copy the TestMarshalerLib.dll to Marshaler directory in your executeable project
+1. Implement the *?* in your schema
 
 ```
 PM> Install-Package RaGae.Argument.Marshaler

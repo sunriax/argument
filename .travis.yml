@@ -1,6 +1,8 @@
 # Travis CI build pipeline
 # --------------------------------------------
 
+os: linux
+dist: xenial
 language: csharp
 solution: ArgumentLib.sln
 mono: none
@@ -30,7 +32,7 @@ script:
 before_deploy:
   - set -e
   - dotnet build -c Release -o ./output
-  - zip ./Argument.zip ./output
+  - zip ./Argument.zip ./output/*
   - tar cfvz ./Argument.tar.gz ./output
 
 deploy:
@@ -52,4 +54,4 @@ deploy:
     tags: true
 
 after_deploy:
-  - dotnet nuget push ./output/'*.nupkg' -k $NUGET_TOKEN -s https://api.nuget.org/v3/index.json
+  - dotnet nuget push --skip-duplicate ./output/'*.nupkg' -k $NUGET_TOKEN -s https://api.nuget.org/v3/index.json
