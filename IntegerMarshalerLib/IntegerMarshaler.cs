@@ -39,7 +39,7 @@ namespace RaGae.ArgumentLib.IntegerMarshalerLib
                     case ErrorCode.MISSING:
                         return $"Could not find integer parameter for -{base.ErrorArgumentId}";
                     case ErrorCode.INVALID:
-                        return $"Argument -{this.ErrorArgumentId} expects an integer but was '{base.ErrorParameter}'";
+                        return $"Argument -{base.ErrorArgumentId} expects an integer but was '{base.ErrorParameter}'";
                     default:
                         return string.Empty;
                 }

@@ -15,7 +15,7 @@
     <Copyright>(c) 2020 G.Raf</Copyright>
     <PackageProjectUrl>https://github.com/sunriax/argument</PackageProjectUrl>
     <PackageTags>argument, base, handling, ragae, sunriax, 0x007E</PackageTags>
-    <Version>1.0.3</Version>
+    <Version>1.0.4</Version>
     <Description>Base class for command line interface argument handling/building.</Description>
     <PackageId>RaGae.Argument.Marshaler</PackageId>
     <RepositoryUrl>https://github.com/sunriax/argument.git</RepositoryUrl>
@@ -24,7 +24,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="RaGae.Exception" Version="1.0.2" />
+    <PackageReference Include="RaGae.Exception" Version="1.0.3" />
   </ItemGroup>
 
 </Project>
