@@ -6,7 +6,7 @@ dist: xenial
 language: csharp
 solution: ArgumentLib.sln
 mono: none
-dotnet: 3.1.403
+dotnet: 5.0.301
 
 addons:
   apt:
@@ -21,8 +21,7 @@ before_script:
 
 script:
   - |
-    if [ -z "$TRAVIS_TAG" ]
-    then
+    if [[ -z "$TRAVIS_TAG" ]]; then
       set -e
       dotnet build -c Release
       dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:Exclude="[xunit*]*" /p:excludebyfile="**/*.Designer.cs"
@@ -31,11 +30,14 @@ script:
 
 before_deploy:
   - set -e
-  #- dotnet build -c Release -o ./output
-  - dotnet publish ArgumentLib.sln -c Release -o output
+  - dotnet build ArgumentLib.sln -c Release
   - dotnet pack ArgumentLib.sln -c Release -o nuget
-  - zip ./Argument.zip ./output/* ./nuget/*
-  - tar cfvz ./Argument.tar.gz ./output ./nuget
+  - |
+    mkdir output
+    mv ./ArgumentLib/bin/Release ./output/ArgumentLib
+  - |
+    zip -r ./Argument.zip ./output/* 
+    tar cfvz ./Argument.tar.gz ./output
 
 deploy:
   provider: releases
@@ -44,11 +46,11 @@ deploy:
   file:
     - "./Argument.zip"
     - "./Argument.tar.gz"
-    - "./output/RaGae.ArgumentLib.MarshalerLib.dll"
-    - "./output/RaGae.ArgumentLib.BooleanMarshalerLib.dll"
-    - "./output/RaGae.ArgumentLib.StringMarshalerLib.dll"
-    - "./output/RaGae.ArgumentLib.IntegerMarshalerLib.dll"
-    - "./output/RaGae.ArgumentLib.DoubleMarshalerLib.dll"
+    - "./ArgumentLib/bin/Release/netstandard2.0/RaGae.ArgumentLib.MarshalerLib.dll"
+    - "./BooleanMarshalerLib/bin/Release/netstandard2.0/RaGae.ArgumentLib.BooleanMarshalerLib.dll"
+    - "./StringMarshalerLib/bin/Release/netstandard2.0/RaGae.ArgumentLib.StringMarshalerLib.dll"
+    - "./IntegerMarshalerLib/bin/Release/netstandard2.0/RaGae.ArgumentLib.IntegerMarshalerLib.dll"
+    - "./DoubleMarshalerLib/bin/Release/netstandard2.0/RaGae.ArgumentLib.DoubleMarshalerLib.dll"
   skip_cleanup: true
   on:
     tags: true

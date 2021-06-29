@@ -1,4 +1,4 @@
-[![Version: 1.0 Release](https://img.shields.io/badge/Version-1.0%20Release-green.svg)](https://github.com/sunriax) [![Build Status](https://www.travis-ci.org/sunriax/argument.svg?branch=master)](https://www.travis-ci.org/sunriax/argument) [![codecov](https://codecov.io/gh/sunriax/argument/branch/master/graph/badge.svg)](https://codecov.io/gh/sunriax/argument) [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![Version: 1.0 Release](https://img.shields.io/badge/Version-1.0%20Release-green.svg)](https://github.com/sunriax) [![NuGet](https://img.shields.io/nuget/dt/ragae.argument.svg)](https://www.nuget.org/packages/ragae.argument) [![Build Status](https://www.travis-ci.com/sunriax/argument.svg?branch=main)](https://www.travis-ci.com/sunriax/argument) [![codecov](https://codecov.io/gh/sunriax/argument/branch/main/graph/badge.svg)](https://codecov.io/gh/sunriax/argument) [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 # Argument Reader
 
@@ -115,6 +115,13 @@ To copy the Marshalers to output folder setup the *.csproj file.
 ```
 
 ### NuGet installation
+
+|Marshaler|Downloads|
+|---------|---------|
+| Boolean Marshaler | [![NuGet](https://img.shields.io/nuget/dt/ragae.argument.booleanmarshaler.svg)](https://www.nuget.org/packages/ragae.argument.booleanmarshaler) |
+| String Marshaler | [![NuGet](https://img.shields.io/nuget/dt/ragae.argument.stringmarshaler.svg)](https://www.nuget.org/packages/ragae.argument.stringmarshaler) |
+| Integer Marshaler | [![NuGet](https://img.shields.io/nuget/dt/ragae.argument.integermarshaler.svg)](https://www.nuget.org/packages/ragae.argument.integermarshaler) |
+| Double Marshaler | [![NuGet](https://img.shields.io/nuget/dt/ragae.argument.doublemarshaler.svg)](https://www.nuget.org/packages/ragae.argument.doublemarshaler) |
 
 ```
 PM> Install-Package RaGae.Argument.BooleanMarshaler

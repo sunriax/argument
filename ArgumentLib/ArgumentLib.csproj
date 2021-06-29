@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>net5.0;netstandard2.0;netstandard2.1;net472</TargetFrameworks>
     <RootNamespace>RaGae</RootNamespace>
     <AssemblyName>RaGae.$(MSBuildProjectName)</AssemblyName>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -15,17 +15,26 @@
     <Copyright>(c) 2020 G.Raf</Copyright>
     <PackageProjectUrl>https://github.com/sunriax/argument</PackageProjectUrl>
     <PackageTags>command, cli, argument, parameter, console, ragae, sunriax, 0x007E</PackageTags>
-    <Version>1.0.4</Version>
+    <Version>1.0.5</Version>
     <Description>Tool for reading arguments (bool, integer, double, string) from the command line within a given schema. The tool also can easily be extended, without recompiling the whole library.</Description>
     <PackageId>RaGae.Argument</PackageId>
     <RepositoryUrl>https://github.com/sunriax/argument.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageReleaseNotes></PackageReleaseNotes>
+    <PackageIcon>GRAF.png</PackageIcon>
+    <PackageIconUrl />
   </PropertyGroup>
+  
+  <ItemGroup>
+    <None Include="..\GRAF.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
     
   <ItemGroup>
-    <PackageReference Include="RaGae.Reflection" Version="1.0.4" />
-    <PackageReference Include="RaGae.Bootstrap" Version="0.1.0" />
+    <PackageReference Include="RaGae.Reflection" Version="1.0.5" />
+    <PackageReference Include="RaGae.Bootstrap" Version="1.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -47,5 +56,14 @@
       <CustomToolNamespace>RaGae.ArgumentLib</CustomToolNamespace>
     </EmbeddedResource>
   </ItemGroup>
+
+  
+  <ItemGroup>
+    <ApplicationFile Include="$(ProjectDir)\ArgumentLib.json" />
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Copy SourceFiles="@(ApplicationFile)" DestinationFolder="$(SolutionDir)\ReadArgument" SkipUnchangedFiles="false" />
+  </Target>
 
 </Project>

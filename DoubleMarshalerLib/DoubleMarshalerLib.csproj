@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>net5.0;netstandard2.0;netstandard2.1;net472</TargetFrameworks>
     <RootNamespace>RaGae</RootNamespace>
     <AssemblyName>RaGae.ArgumentLib.$(MSBuildProjectName)</AssemblyName>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -15,13 +15,22 @@
     <Copyright>(c) 2020 G.Raf</Copyright>
     <PackageProjectUrl>https://github.com/sunriax/argument</PackageProjectUrl>
     <PackageTags>command, cli, argument, parameter, console, double, ragae, sunriax, 0x007E</PackageTags>
-    <Version>1.0.4</Version>
+    <Version>1.0.5</Version>
     <Description>Tool for reading double arguments from the command line.</Description>
     <PackageId>RaGae.Argument.DoubleMarshaler</PackageId>
     <RepositoryUrl>https://github.com/sunriax/argument.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageReleaseNotes></PackageReleaseNotes>
+    <PackageIcon>GRAF.png</PackageIcon>
+    <PackageIconUrl />
   </PropertyGroup>
+  
+  <ItemGroup>
+    <None Include="..\GRAF.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
   
   <ItemGroup>
     <ProjectReference Include="..\MarshalerLib\MarshalerLib.csproj" />
