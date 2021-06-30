@@ -46,7 +46,7 @@ deploy:
   file:
     - "./Argument.zip"
     - "./Argument.tar.gz"
-    - "./ArgumentLib/bin/Release/netstandard2.0/RaGae.ArgumentLib.MarshalerLib.dll"
+    - "./MarshalerLib/bin/Release/netstandard2.0/RaGae.ArgumentLib.MarshalerLib.dll"
     - "./BooleanMarshalerLib/bin/Release/netstandard2.0/RaGae.ArgumentLib.BooleanMarshalerLib.dll"
     - "./StringMarshalerLib/bin/Release/netstandard2.0/RaGae.ArgumentLib.StringMarshalerLib.dll"
     - "./IntegerMarshalerLib/bin/Release/netstandard2.0/RaGae.ArgumentLib.IntegerMarshalerLib.dll"
