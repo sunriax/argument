@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net6.0;netstandard2.0;netstandard2.1;net472</TargetFrameworks>
+    <RootNamespace>RaGae</RootNamespace>
+    <AssemblyName>RaGae.ArgumentLib.$(MSBuildProjectName)</AssemblyName>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageLicenseExpression>GPL-3.0-only</PackageLicenseExpression>
+    <Title>$(MSBuildProjectName)</Title>
+    <Authors>G.Raf</Authors>
+    <Company>G.Raf^engineering</Company>
+    <Copyright>(c) 2020 G.Raf</Copyright>
+    <PackageProjectUrl>https://github.com/sunriax/argument</PackageProjectUrl>
+    <PackageTags>argument, base, handling, ragae, sunriax, 0x007E</PackageTags>
+    <Version>1.0.6</Version>
+    <Description>Base class for command line interface argument handling/building.</Description>
+    <PackageId>RaGae.Argument.Marshaler</PackageId>
+    <RepositoryUrl>https://github.com/sunriax/argument.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageReleaseNotes></PackageReleaseNotes>
+    <PackageIcon>GRAF.png</PackageIcon>
+    <PackageIconUrl />
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <None Include="..\GRAF.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="RaGae.Exception" Version="1.0.6" />
+  </ItemGroup>
+
+</Project>

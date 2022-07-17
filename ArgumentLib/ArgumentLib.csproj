@@ -1,0 +1,69 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net6.0;netstandard2.0;netstandard2.1;net472</TargetFrameworks>
+    <RootNamespace>RaGae</RootNamespace>
+    <AssemblyName>RaGae.$(MSBuildProjectName)</AssemblyName>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageLicenseExpression>GPL-3.0-only</PackageLicenseExpression>
+    <Title>$(MSBuildProjectName)</Title>
+    <Authors>G.Raf</Authors>
+    <Company>G.Raf^engineering</Company>
+    <Copyright>(c) 2020 G.Raf</Copyright>
+    <PackageProjectUrl>https://github.com/sunriax/argument</PackageProjectUrl>
+    <PackageTags>command, cli, argument, parameter, console, ragae, sunriax, 0x007E</PackageTags>
+    <Version>1.0.6</Version>
+    <Description>Tool for reading arguments (bool, integer, double, string) from the command line within a given schema. The tool also can easily be extended, without recompiling the whole library.</Description>
+    <PackageId>RaGae.Argument</PackageId>
+    <RepositoryUrl>https://github.com/sunriax/argument.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageReleaseNotes></PackageReleaseNotes>
+    <PackageIcon>GRAF.png</PackageIcon>
+    <PackageIconUrl />
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <None Include="..\GRAF.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+    
+  <ItemGroup>
+    <PackageReference Include="RaGae.Reflection" Version="1.0.6" />
+    <PackageReference Include="RaGae.Bootstrap" Version="1.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MarshalerLib\MarshalerLib.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="ArgumentResource.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ArgumentResource.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="ArgumentResource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ArgumentResource.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>RaGae.ArgumentLib</CustomToolNamespace>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  
+  <ItemGroup>
+    <ApplicationFile Include="$(ProjectDir)\ArgumentLib.json" />
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Copy SourceFiles="@(ApplicationFile)" DestinationFolder="$(SolutionDir)\ReadArgument" SkipUnchangedFiles="false" />
+  </Target>
+
+</Project>

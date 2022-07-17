@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "ReadArgument": {
+      "commandName": "Project",
+      "commandLineArgs": "-StRiNg \"Test string\" -string2 \"Test string2\" -InT 1234 -number2 5678 -DoUbLe 123,456 -decimal2 456,123 -BoOl"
+    }
+  }
+}

@@ -1,0 +1,43 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+    <IsPublishable>false</IsPublishable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ArgumentLib\ArgumentLib.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Marshaler\" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ApplicationFile Include="$(SolutionDir)ArgumentLib\ArgumentLib.json" />
+  </ItemGroup>
+    
+  <ItemGroup>
+    <ApplicationNoSchemaFile Include="$(SolutionDir)ArgumentLib\ArgumentLib.NoSchema.json" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <LibraryFiles Include="$(ProjectDir)Marshaler\*" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Update="ArgumentLib.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Copy SourceFiles="@(ApplicationFile)" DestinationFolder="$(TargetDir)" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(ApplicationNoSchemaFile)" DestinationFolder="$(TargetDir)" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(LibraryFiles)" DestinationFolder="$(TargetDir)Marshaler" SkipUnchangedFiles="true" />
+  </Target>
+  
+</Project>

@@ -1,0 +1,37 @@
+﻿{
+	"ReflectionConfig": [
+		{
+			"ReflectionPath": "Marshaler",
+			"FileSpecifier": "*MarshalerLib.dll",
+			"Files": [
+				"Marshaler/RaGae.ArgumentLib.BooleanMarshalerLib.dll",
+				"Marshaler/RaGae.ArgumentLib.StringMarshalerLib.dll",
+				"Marshaler/RaGae.ArgumentLib.IntegerMarshalerLib.dll",
+				"Marshaler/RaGae.ArgumentLib.DoubleMarshalerLib.dll"
+			]
+		}
+	],
+	"ArgumentConfig": {
+		"Schema": [
+			{
+				"Argument": [
+					"string",
+					"text",
+					"data"
+				],
+				"Marshaler": "*",
+				"Required": true
+			},
+			{
+				"Argument": [
+					"StRiNg2",
+					"TeXt2",
+					"DaTa2"
+				],
+				"Marshaler": "*",
+				"Required": false
+			}
+		],
+		"Delimiter": ""
+	}
+}

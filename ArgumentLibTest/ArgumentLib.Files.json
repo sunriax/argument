@@ -1,0 +1,83 @@
+﻿{
+	"ReflectionConfig": [
+		{
+			"Files": [
+				"Marshaler/RaGae.ArgumentLib.BooleanMarshalerLib.dll",
+				"Marshaler/RaGae.ArgumentLib.StringMarshalerLib.dll",
+				"Marshaler/RaGae.ArgumentLib.IntegerMarshalerLib.dll",
+				"Marshaler/RaGae.ArgumentLib.DoubleMarshalerLib.dll"
+			]
+		}
+	],
+	"ArgumentConfig": {
+		"Schema": [
+			{
+				"Argument": [
+					"string",
+					"text",
+					"data"
+				],
+				"Marshaler": "*",
+				"Required": true
+			},
+			{
+				"Argument": [
+					"StRiNg2",
+					"TeXt2",
+					"DaTa2"
+				],
+				"Marshaler": "*",
+				"Required": false
+			},
+			{
+				"Argument": [
+					"int",
+					"number"
+				],
+				"Marshaler": "#",
+				"Required": true
+			},
+			{
+				"Argument": [
+					"InT2",
+					"number2"
+				],
+				"Marshaler": "#",
+				"Required": false
+			},
+			{
+				"Argument": [
+					"double",
+					"decimal"
+				],
+				"Marshaler": "##",
+				"Required": true
+			},
+			{
+				"Argument": [
+					"DoUbLe2",
+					"DeCiMaL2"
+				],
+				"Marshaler": "##",
+				"Required": false
+			},
+			{
+				"Argument": [
+					"bool",
+					"boolean"
+				],
+				"Marshaler": "",
+				"Required": true
+			},
+			{
+				"Argument": [
+					"BoOl2",
+					"BoOlEaN2"
+				],
+				"Marshaler": "",
+				"Required": false
+			}
+		],
+		"Delimiter": "-:/"
+	}
+}

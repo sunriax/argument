@@ -1,0 +1,19 @@
+﻿{
+	"ReflectionConfig": [
+		{
+			"ReflectionPath": "Marshaler",
+			"FileSpecifier": "*MarshalerLib.dll",
+			"Files": [
+				"Marshaler/RaGae.ArgumentLib.BooleanMarshalerLib.dll",
+				"Marshaler/RaGae.ArgumentLib.StringMarshalerLib.dll",
+				"Marshaler/RaGae.ArgumentLib.IntegerMarshalerLib.dll",
+				"Marshaler/RaGae.ArgumentLib.DoubleMarshalerLib.dll"
+			]
+		}
+	],
+	"ArgumentConfig": {
+		"Schema": [
+		],
+		"Delimiter": "-:/"
+	}
+}
